@@ -1,70 +1,288 @@
-html { scroll-behavior: smooth; }
-body { font-family: 'Poppins', sans-serif; background-color: #050505; color: #f0f0f0; cursor: none; overflow-x: hidden; }
+/* Custom CSS Variables for Easy Theming */
+:root {
+  --bg-color: #0a0a0a;
+  --text-color: #e5e7eb;
+  --text-gray: #9ca3af;
+  --primary-color: #3b82f6;
+  --primary-hover: #2563eb;
+  --border-color: rgba(59, 130, 246, 0.4);
+  --card-bg: #111827;
+}
+
+/* Base Styles & Dark Theme */
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  font-family: "Poppins", sans-serif;
+  overflow-x: hidden;
+  cursor: none;
+}
 
 /* Custom Cursor */
-.cursor-dot, .cursor-outline { position: fixed; top: 0; left: 0; transform: translate(-50%, -50%); border-radius: 50%; z-index: 9999; pointer-events: none; transition: all 0.1s ease-out; }
-.cursor-dot { width: 8px; height: 8px; background-color: #3b82f6; }
-.cursor-outline { width: 40px; height: 40px; border: 2px solid #3b82f6; }
-.cursor-outline.grow { transform: translate(-50%, -50%) scale(1.5); border-color: #60a5fa; }
+.cursor-dot,
+.cursor-outline {
+  pointer-events: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  z-index: 9999;
+  opacity: 1;
+  transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+}
+.cursor-dot {
+  width: 8px;
+  height: 8px;
+  background-color: var(--primary-color);
+}
+.cursor-outline {
+  width: 40px;
+  height: 40px;
+  background-color: rgba(59, 130, 246, 0.3);
+}
 
-/* ****** NEW BORDER DRAW ANIMATION ****** */
+/* Reusable Components */
+.section-title {
+  font-size: 2.25rem; /* text-4xl */
+  font-weight: 700;
+  margin-bottom: 1.5rem; /* mb-6 */
+}
+
+.cta-button {
+  background-color: var(--primary-color);
+  color: white;
+  font-weight: 600;
+  padding: 0.75rem 2rem;
+  border-radius: 0.5rem;
+  box-shadow: 0 4px 14px 0 rgba(59, 130, 246, 0.3);
+  transform: scale(1);
+  transition: all 0.3s ease;
+  display: inline-block;
+}
+.cta-button:hover {
+  background-color: var(--primary-hover);
+  transform: scale(1.05);
+}
+
+.nav-link {
+  color: var(--text-gray);
+  transition: color 0.3s;
+  font-weight: 500;
+  position: relative;
+  padding-bottom: 4px;
+}
+.nav-link:hover {
+  color: var(--primary-color);
+}
+.nav-link::after {
+  content: "";
+  position: absolute;
+  height: 2px;
+  width: 0;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: var(--primary-color);
+  transition: width 0.3s ease;
+}
+.nav-link:hover::after {
+  width: 100%;
+}
+.link {
+  color: var(--primary-color);
+  text-decoration: none;
+  transition: text-decoration 0.3s;
+}
+.link:hover {
+  text-decoration: underline;
+}
+
+/* Hover-Draw Border Animation */
 .draw-border {
-    position: relative;
-    transition: color 0.4s;
+  position: relative;
+  background-image: linear-gradient(
+      var(--border-color),
+      var(--border-color)
+    ),
+    linear-gradient(var(--border-color), var(--border-color)),
+    linear-gradient(var(--border-color), var(--border-color)),
+    linear-gradient(var(--border-color), var(--border-color));
+  background-repeat: no-repeat;
+  background-size: 2px 0, 0 2px, 2px 0, 0 2px;
+  background-position: top left, top right, bottom right, bottom left;
+  transition: background-size 0.3s ease-in-out;
 }
-.draw-border::before, .draw-border::after {
-    content: '';
-    position: absolute;
-    width: 0;
-    height: 0;
-    opacity: 0;
-    box-sizing: border-box;
-    transition: width 0.3s ease-out, height 0.3s ease-out 0.3s, opacity 0s 0.6s;
+.draw-border:hover {
+  background-size: 2px 100%, 100% 2px, 2px 100%, 100% 2px;
 }
-.draw-border::before {
-    top: 0;
-    left: 0;
-    border-top: 2px solid #3b82f6;
-    border-left: 2px solid #3b82f6;
+
+/* Animated Glow Border for Project Cards */
+@property --angle {
+  syntax: "<angle>";
+  initial-value: 0deg;
+  inherits: false;
 }
-.draw-border::after {
-    bottom: 0;
-    right: 0;
-    border-bottom: 2px solid #3b82f6;
-    border-right: 2px solid #3b82f6;
+
+.animated-glow-border {
+  position: relative;
+  border-radius: 0.5rem;
+  overflow: hidden;
+  background-color: var(--card-bg);
 }
-.draw-border:hover::before, .draw-border:hover::after {
+
+.animated-glow-border::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 150%;
+  height: 150%;
+  background: conic-gradient(
+    from var(--angle),
+    transparent 0%,
+    transparent 40%,
+    var(--primary-color) 70%,
+    transparent 80%,
+    transparent 100%
+  );
+  animation: spin 4s linear infinite;
+  z-index: 1;
+}
+
+.animated-glow-border::after {
+  content: "";
+  position: absolute;
+  inset: 3px;
+  border-radius: 0.5rem;
+  background-color: var(--card-bg);
+  z-index: 2;
+}
+
+.project-card > * {
+  position: relative;
+  z-index: 3; /* Ensure content is above the border */
+}
+
+@keyframes spin {
+  to {
+    --angle: 360deg;
+  }
+}
+
+.project-image {
     width: 100%;
-    height: 100%;
-    opacity: 1;
-    transition: width 0.3s ease-in 0.3s, height 0.3s ease-in, opacity 0s;
+    height: 14rem; /* h-56 */
+    object-fit: cover;
+    transition: transform 0.5s ease;
 }
-/* For rounded corners on profile picture */
-.draw-border.rounded-full::before, .draw-border.rounded-full::after {
-    border-radius: 50%;
-}
-/* For regular cards */
-.draw-border.rounded-lg::before, .draw-border.rounded-lg::after {
-    border-radius: 0.5rem;
+.project-card:hover .project-image {
+    transform: scale(1.05);
 }
 
 
-/* Scroll Animation (Fade-in) */
-.hidden-anim { opacity: 0; transform: translateY(50px); transition: opacity 0.8s ease-out, transform 0.8s ease-out; }
-.show-anim { opacity: 1; transform: translateY(0); }
+/* Resume Section Tabs */
+.tab-btn {
+  background-color: transparent;
+  border: 2px solid var(--border-color);
+  color: var(--text-gray);
+  font-size: 1.125rem;
+  font-weight: 600;
+  padding: 0.5rem 1.5rem;
+  border-radius: 0.5rem;
+  transition: all 0.3s ease;
+}
+.tab-btn.active {
+  background-color: var(--primary-color);
+  color: white;
+  border-color: var(--primary-color);
+  box-shadow: 0 4px 14px 0 rgba(59, 130, 246, 0.3);
+}
+.tab-content.hidden {
+  display: none;
+}
 
-/* Timeline Styles */
-.timeline::after { content: ''; position: absolute; width: 3px; background-color: #3b82f6; top: 0; bottom: 0; left: 50%; margin-left: -1.5px; }
-.timeline-item { padding: 10px 40px; position: relative; width: 50%; margin-bottom: 30px; }
-.timeline-item:nth-child(odd) { left: 0; }
-.timeline-item:nth-child(even) { left: 50%; }
-.timeline-item::after { content: ''; position: absolute; width: 16px; height: 16px; background-color: #050505; border: 3px solid #3b82f6; top: 25px; border-radius: 50%; z-index: 1; }
-.timeline-item:nth-child(odd)::after { right: -8px; }
-.timeline-item:nth-child(even)::after { left: -8px; }
-.timeline-content { padding: 20px 30px; background-color: rgba(17, 24, 39, 0.5); backdrop-filter: blur(10px); border-radius: 0.5rem; }
-@media (max-width: 768px) {
-    .timeline::after { left: 20px; }
-    .timeline-item { width: 100%; padding-left: 60px; padding-right: 15px; }
-    .timeline-item:nth-child(even) { left: 0; }
-    .timeline-item:nth-child(odd)::after, .timeline-item:nth-child(even)::after { left: 12px; }
+.skill-badge {
+  background-color: #374151;
+  color: #d1d5db;
+  padding: 6px 16px;
+  border-radius: 9999px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+.skill-badge:hover {
+  background-color: var(--primary-color);
+  color: white;
+  transform: translateY(-2px);
+}
+
+/* Timeline */
+.timeline::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 3px;
+  height: 100%;
+  background-color: #374151;
+}
+.timeline-item {
+  position: relative;
+  width: 50%;
+  padding: 20px 40px;
+  box-sizing: border-box;
+}
+.timeline-item:nth-child(odd) {
+  left: 0;
+}
+.timeline-item:nth-child(even) {
+  left: 50%;
+}
+.timeline-item::after {
+  content: "";
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  background-color: var(--bg-color);
+  border: 4px solid var(--primary-color);
+  top: 25px;
+  border-radius: 50%;
+  z-index: 10;
+}
+.timeline-item:nth-child(odd)::after {
+  right: -10px;
+}
+.timeline-item:nth-child(even)::after {
+  left: -10px;
+}
+.timeline-content {
+  padding: 20px 30px;
+  background-color: rgba(17, 24, 39, 0.5); /* bg-gray-900/50 */
+}
+
+@media screen and (max-width: 768px) {
+  .timeline::before { left: 20px; }
+  .timeline-item { width: 100%; padding-left: 60px; padding-right: 20px; }
+  .timeline-item:nth-child(even) { left: 0%; }
+  .timeline-item::after { left: 10px; }
+}
+
+/* Scroll Animation */
+.hidden-anim {
+  opacity: 0;
+  filter: blur(5px);
+  transform: translateY(20%);
+  transition: all 1s;
+}
+.show-anim {
+  opacity: 1;
+  filter: blur(0);
+  transform: translateY(0);
 }
