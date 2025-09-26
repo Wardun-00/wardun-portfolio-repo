@@ -1,0 +1,70 @@
+html { scroll-behavior: smooth; }
+body { font-family: 'Poppins', sans-serif; background-color: #050505; color: #f0f0f0; cursor: none; overflow-x: hidden; }
+
+/* Custom Cursor */
+.cursor-dot, .cursor-outline { position: fixed; top: 0; left: 0; transform: translate(-50%, -50%); border-radius: 50%; z-index: 9999; pointer-events: none; transition: all 0.1s ease-out; }
+.cursor-dot { width: 8px; height: 8px; background-color: #3b82f6; }
+.cursor-outline { width: 40px; height: 40px; border: 2px solid #3b82f6; }
+.cursor-outline.grow { transform: translate(-50%, -50%) scale(1.5); border-color: #60a5fa; }
+
+/* ****** NEW BORDER DRAW ANIMATION ****** */
+.draw-border {
+    position: relative;
+    transition: color 0.4s;
+}
+.draw-border::before, .draw-border::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 0;
+    opacity: 0;
+    box-sizing: border-box;
+    transition: width 0.3s ease-out, height 0.3s ease-out 0.3s, opacity 0s 0.6s;
+}
+.draw-border::before {
+    top: 0;
+    left: 0;
+    border-top: 2px solid #3b82f6;
+    border-left: 2px solid #3b82f6;
+}
+.draw-border::after {
+    bottom: 0;
+    right: 0;
+    border-bottom: 2px solid #3b82f6;
+    border-right: 2px solid #3b82f6;
+}
+.draw-border:hover::before, .draw-border:hover::after {
+    width: 100%;
+    height: 100%;
+    opacity: 1;
+    transition: width 0.3s ease-in 0.3s, height 0.3s ease-in, opacity 0s;
+}
+/* For rounded corners on profile picture */
+.draw-border.rounded-full::before, .draw-border.rounded-full::after {
+    border-radius: 50%;
+}
+/* For regular cards */
+.draw-border.rounded-lg::before, .draw-border.rounded-lg::after {
+    border-radius: 0.5rem;
+}
+
+
+/* Scroll Animation (Fade-in) */
+.hidden-anim { opacity: 0; transform: translateY(50px); transition: opacity 0.8s ease-out, transform 0.8s ease-out; }
+.show-anim { opacity: 1; transform: translateY(0); }
+
+/* Timeline Styles */
+.timeline::after { content: ''; position: absolute; width: 3px; background-color: #3b82f6; top: 0; bottom: 0; left: 50%; margin-left: -1.5px; }
+.timeline-item { padding: 10px 40px; position: relative; width: 50%; margin-bottom: 30px; }
+.timeline-item:nth-child(odd) { left: 0; }
+.timeline-item:nth-child(even) { left: 50%; }
+.timeline-item::after { content: ''; position: absolute; width: 16px; height: 16px; background-color: #050505; border: 3px solid #3b82f6; top: 25px; border-radius: 50%; z-index: 1; }
+.timeline-item:nth-child(odd)::after { right: -8px; }
+.timeline-item:nth-child(even)::after { left: -8px; }
+.timeline-content { padding: 20px 30px; background-color: rgba(17, 24, 39, 0.5); backdrop-filter: blur(10px); border-radius: 0.5rem; }
+@media (max-width: 768px) {
+    .timeline::after { left: 20px; }
+    .timeline-item { width: 100%; padding-left: 60px; padding-right: 15px; }
+    .timeline-item:nth-child(even) { left: 0; }
+    .timeline-item:nth-child(odd)::after, .timeline-item:nth-child(even)::after { left: 12px; }
+}
