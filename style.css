@@ -222,7 +222,7 @@ body {
   transform: translateY(-2px);
 }
 
-/* Timeline */
+/* Timeline (Desktop First) */
 .timeline::before {
   content: "";
   position: absolute;
@@ -267,12 +267,6 @@ body {
   background-color: rgba(17, 24, 39, 0.5); /* bg-gray-900/50 */
 }
 
-@media screen and (max-width: 768px) {
-  .timeline::before { left: 20px; }
-  .timeline-item { width: 100%; padding-left: 60px; padding-right: 20px; }
-  .timeline-item:nth-child(even) { left: 0%; }
-  .timeline-item::after { left: 10px; }
-}
 
 /* Scroll Animation */
 .hidden-anim {
@@ -285,4 +279,59 @@ body {
   opacity: 1;
   filter: blur(0);
   transform: translateY(0);
+}
+
+
+/* --- Responsive Adjustments (The FIX is here) --- */
+
+/* ট্যাবলেট এবং মোবাইল ডিভাইসের জন্য (768px পর্যন্ত) */
+@media screen and (max-width: 768px) {
+  .section-title {
+    font-size: 1.875rem; /* text-3xl */
+  }
+
+  /* --- Timeline FIX for Mobile --- */
+  .timeline::before {
+    left: 15px; /* লাইনটিকে বাম দিকে সরানো হয়েছে */
+    transform: translateX(0);
+  }
+  
+  .timeline-item,
+  .timeline-item:nth-child(even) { /* সকল আইটেমকে একই স্টাইল দেওয়া হয়েছে */
+    width: 100%;
+    left: 0; /* সব আইটেম বাম দিক থেকে শুরু হবে */
+    padding-left: 60px; /* লাইন ও ডট এর জন্য জায়গা */
+    padding-right: 15px; /* ডান দিকে সামান্য প্যাডিং */
+  }
+  
+  .timeline-item::after,
+  .timeline-item:nth-child(even)::after { /* সকল ডটকে একই জায়গায় আনা হয়েছে */
+    left: 6px; /* ডটটিকে লাইনের উপরে বসানো হয়েছে */
+  }
+}
+
+/* ছোট মোবাইল ডিভাইসের জন্য (480px পর্যন্ত) */
+@media screen and (max-width: 480px) {
+  .nav-link {
+    font-size: 0.875rem; /* text-sm */
+  }
+  .cta-button {
+    padding: 0.6rem 1.5rem;
+    font-size: 0.875rem;
+  }
+  .tab-btn {
+    font-size: 1rem;
+    padding: 0.5rem 1rem;
+  }
+}
+
+/* টাচ-স্ক্রিন ডিভাইসগুলিতে কাস্টম কার্সার হাইড করা */
+@media (hover: none) and (pointer: coarse) {
+  .cursor-dot,
+  .cursor-outline {
+    display: none !important;
+  }
+  body {
+    cursor: auto !important;
+  }
 }

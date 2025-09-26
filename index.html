@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Your Name - The Complete Portfolio</title>
+    <title>Wardun-Portfolio</title>
 
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -23,7 +23,9 @@
     <header
       class="fixed top-0 left-0 w-full z-50 py-4 backdrop-blur-md bg-black/30"
     >
-      <nav class="max-w-7xl mx-auto px-4 flex justify-center space-x-8">
+      <nav
+        class="max-w-7xl mx-auto px-4 flex justify-center space-x-4 sm:space-x-8"
+      >
         <a href="#about" class="nav-link">About</a>
         <a href="#resume" class="nav-link">Resume</a>
         <a href="#projects" class="nav-link">Projects</a>
@@ -32,6 +34,7 @@
     </header>
 
     <!-- হিরো সেকশন -->
+
     <section
       id="hero"
       class="h-screen flex items-center justify-center relative"
@@ -40,8 +43,8 @@
         id="3d-container"
         class="absolute top-0 left-0 w-full h-full z-0"
       ></div>
-      <div class="z-10 text-center">
-        <h1 class="text-4xl md:text-7xl font-bold mb-4">
+      <div class="z-10 text-center px-4">
+        <h1 class="text-4xl sm:text-5xl md:text-7xl font-bold mb-4">
           I build things for the web.
         </h1>
         <p class="text-lg md:text-xl text-gray-300 mb-8 max-w-2xl mx-auto">
@@ -52,14 +55,17 @@
       </div>
     </section>
 
-    <main class="max-w-7xl mx-auto px-4">
+    <!-- পরিবর্তিত: মূল কন্টেইনারে প্যাডিং বাড়ানো হয়েছে -->
+    <main class="max-w-7xl mx-auto px-6 sm:px-8">
       <!-- অ্যাবাউট সেকশন -->
       <section
         id="about"
-        class="py-24 flex flex-col md:flex-row items-center gap-12 hidden-anim"
+        class="py-16 md:py-24 flex flex-col md:flex-row items-center gap-8 md:gap-12 hidden-anim"
       >
         <div class="md:w-1/3 w-full flex justify-center">
-          <div class="w-64 h-64 rounded-full p-1 relative draw-border">
+          <div
+            class="w-48 h-48 sm:w-64 sm:h-64 rounded-full p-1 relative draw-border"
+          >
             <img
               src="./assets/wd-pfp-removebg-preview.png"
               alt="Wardun Al Sajeeb"
@@ -79,15 +85,22 @@
       </section>
 
       <!-- রেজিউমে সেকশন -->
-      <section id="resume" class="py-24 hidden-anim">
+      <section id="resume" class="py-16 md:py-24 hidden-anim">
         <h2 class="section-title text-center mb-12">My Resume</h2>
 
-        <div class="flex justify-center space-x-4 md:space-x-8 mb-12">
-          <button class="tab-btn active" data-tab="experience">
+        <div
+          class="flex flex-col sm:flex-row justify-center items-center gap-4 sm:space-x-4 md:space-x-8 mb-12"
+        >
+          <!-- পরিবর্তিত: ছোট স্ক্রিনে বাটনগুলো full-width করা হয়েছে -->
+          <button class="tab-btn active w-full sm:w-auto" data-tab="experience">
             Experience
           </button>
-          <button class="tab-btn" data-tab="skills">Skills</button>
-          <button class="tab-btn" data-tab="education">Education</button>
+          <button class="tab-btn w-full sm:w-auto" data-tab="skills">
+            Skills
+          </button>
+          <button class="tab-btn w-full sm:w-auto" data-tab="education">
+            Education
+          </button>
         </div>
 
         <div>
@@ -132,7 +145,7 @@
 
           <!-- স্কিলস ট্যাব -->
           <div id="skills" class="tab-content hidden max-w-4xl mx-auto">
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12">
               <div>
                 <h3 class="text-2xl font-bold mb-6 text-center">
                   Technical Skills
@@ -193,9 +206,10 @@
       </section>
 
       <!-- প্রজেক্ট সেকশন -->
-      <section id="projects" class="py-24 hidden-anim">
+      <section id="projects" class="py-16 md:py-24 hidden-anim">
         <h2 class="section-title text-center mb-16">Featured Projects</h2>
-        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-12">
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-12">
+          <!-- All Project Cards remain the same -->
           <!-- প্রজেক্ট কার্ড ১ -->
           <div class="project-card animated-glow-border">
             <img
@@ -289,9 +303,7 @@
       </section>
 
       <!-- contact section -->
-      <!-- ****** শুধুমাত্র এই contact সেকশনটি আপনার পুরোনোটা দিয়ে রিপ্লেস করুন ****** -->
-
-      <section id="contact" class="py-24 text-center hidden-anim">
+      <section id="contact" class="py-16 md:py-24 text-center hidden-anim">
         <h2 class="section-title mb-4">Get In Touch</h2>
         <p class="text-gray-400 max-w-xl mx-auto mb-8">
           My inbox is always open. Whether you have a question or just want to
@@ -299,8 +311,8 @@
           me on social media.
         </p>
 
-        <!-- ****** নতুন সোশ্যাল আইকন সেকশন শুরু ****** -->
         <div class="flex justify-center space-x-6 mb-10">
+          <!-- Social Icons remain the same -->
           <!-- GitHub Icon -->
           <a href="#" target="_blank" class="social-icon">
             <svg fill="currentColor" class="w-8 h-8" viewBox="0 0 24 24">
@@ -334,7 +346,6 @@
             </svg>
           </a>
         </div>
-        <!-- ****** নতুন সোশ্যাল আইকন সেকশন শেষ ****** -->
 
         <a href="mailto:youremail@example.com" class="cta-button"
           >Say Hello by Email</a
