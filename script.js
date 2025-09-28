@@ -77,6 +77,14 @@ document.addEventListener('DOMContentLoaded', () => {
     const hiddenElements = document.querySelectorAll('.hidden-anim');
     hiddenElements.forEach((el) => observer.observe(el));
 
+    
+     function downloadResume() {
+    const link = document.createElement("a");
+    link.href = "assets/wardun-Resume.pdf";
+    link.download = "wardun-Resume.pdf";
+    link.click();
+  }
+
 
     // --- রেজিউমে ট্যাব কার্যকারিতা ---
     const tabButtons = document.querySelectorAll('.tab-btn');
