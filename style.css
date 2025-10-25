@@ -1,4 +1,4 @@
-/* Custom CSS Variables for Easy Theming */
+/* Custom CSS Variables */
 :root {
   --bg-color: #0a0a0a;
   --text-color: #e5e7eb;
@@ -48,9 +48,9 @@ body {
 
 /* Reusable Components */
 .section-title {
-  font-size: 2.25rem; /* text-4xl */
+  font-size: 2.25rem; 
   font-weight: 700;
-  margin-bottom: 1.5rem; /* mb-6 */
+  margin-bottom: 1.5rem; 
 }
 
 .cta-button {
@@ -166,7 +166,7 @@ body {
 
 .project-card > * {
   position: relative;
-  z-index: 3; /* Ensure content is above the border */
+  z-index: 3; 
 }
 
 @keyframes spin {
@@ -177,7 +177,7 @@ body {
 
 .project-image {
     width: 100%;
-    height: 14rem; /* h-56 */
+    height: 14rem; 
     object-fit: cover;
     transition: transform 0.5s ease;
 }
@@ -222,7 +222,7 @@ body {
   transform: translateY(-2px);
 }
 
-/* Timeline (Desktop First) */
+/* Timeline  */
 .timeline::before {
   content: "";
   position: absolute;
@@ -264,7 +264,8 @@ body {
 }
 .timeline-content {
   padding: 20px 30px;
-  background-color: rgba(17, 24, 39, 0.5); /* bg-gray-900/50 */
+  background-color: rgba(17, 24, 39, 0.5); 
+  /* bg-gray-900/50 */
 }
 
 
@@ -282,35 +283,35 @@ body {
 }
 
 
-/* --- Responsive Adjustments (The FIX is here) --- */
+/* --- Responsive section--- */
 
-/* ট্যাবলেট এবং মোবাইল ডিভাইসের জন্য (768px পর্যন্ত) */
+/*tablet */
 @media screen and (max-width: 768px) {
   .section-title {
     font-size: 1.875rem; /* text-3xl */
   }
 
-  /* --- Timeline FIX for Mobile --- */
+  /* --- Timeline--- */
   .timeline::before {
-    left: 15px; /* লাইনটিকে বাম দিকে সরানো হয়েছে */
+    left: 15px; 
     transform: translateX(0);
   }
   
   .timeline-item,
-  .timeline-item:nth-child(even) { /* সকল আইটেমকে একই স্টাইল দেওয়া হয়েছে */
+  .timeline-item:nth-child(even) { 
     width: 100%;
-    left: 0; /* সব আইটেম বাম দিক থেকে শুরু হবে */
-    padding-left: 60px; /* লাইন ও ডট এর জন্য জায়গা */
-    padding-right: 15px; /* ডান দিকে সামান্য প্যাডিং */
+    left: 0; 
+    padding-left: 60px; 
+    padding-right: 15px; 
   }
   
   .timeline-item::after,
-  .timeline-item:nth-child(even)::after { /* সকল ডটকে একই জায়গায় আনা হয়েছে */
-    left: 6px; /* ডটটিকে লাইনের উপরে বসানো হয়েছে */
+  .timeline-item:nth-child(even)::after { 
+    left: 6px; 
   }
 }
 
-/* ছোট মোবাইল ডিভাইসের জন্য (480px পর্যন্ত) */
+/* small device */
 @media screen and (max-width: 480px) {
   .nav-link {
     font-size: 0.875rem; /* text-sm */
@@ -325,7 +326,6 @@ body {
   }
 }
 
-/* টাচ-স্ক্রিন ডিভাইসগুলিতে কাস্টম কার্সার হাইড করা */
 @media (hover: none) and (pointer: coarse) {
   .cursor-dot,
   .cursor-outline {
